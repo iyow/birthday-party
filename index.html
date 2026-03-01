@@ -25,14 +25,66 @@
 
             <!-- 游戏区域 -->
             <div class="game-section">
-                <h2>🎮 生日蛋糕装饰游戏</h2>
-                <p class="game-instruction">选择装饰品并在蛋糕上点击放置！<br>创造最美丽的生日蛋糕吧！</p>
+                <div class="game-selector">
+                    <button class="game-selector-btn active" data-game="coins">接金币游戏</button>
+                    <button class="game-selector-btn" data-game="cake">蛋糕装饰游戏</button>
+                </div>
+                
+                <h2 id="game-title">🎮 接金币游戏</h2>
+                <p id="game-instruction" class="game-instruction">移动鼠标控制钱袋子接住掉落的金币！<br>不要让金币掉到地上，否则会损失生命！</p>
+                
                 <div class="game-stats">
                     <div class="stat">分数: <span id="score">0</span></div>
-                    <div class="stat">生命: <span id="lives">∞</span> ❤️</div>
+                    <div class="stat">生命: <span id="lives">3</span> ❤️</div>
                 </div>
+                
                 <canvas id="game-canvas"></canvas>
-                <!-- 装饰游戏的控制面板将通过JavaScript动态创建 -->
+                
+                <button id="start-game" class="game-btn">开始游戏</button>
+                <button id="restart-game" class="game-btn hidden">重新开始</button>
+                
+                <!-- 蛋糕装饰游戏的控制面板 -->
+                <div id="cake-game-controls" class="hidden">
+                    <div id="decoration-panel">
+                        <h3>🎂 选择装饰品</h3>
+                        <div class="decorations-grid">
+                            <div class="decoration-item" data-index="0">
+                                <span class="decoration-emoji">🕯️</span>
+                                <span class="decoration-name">蜡烛</span>
+                                <span class="decoration-price">¥10</span>
+                            </div>
+                            <div class="decoration-item" data-index="1">
+                                <span class="decoration-emoji">🍒</span>
+                                <span class="decoration-name">樱桃</span>
+                                <span class="decoration-price">¥15</span>
+                            </div>
+                            <div class="decoration-item" data-index="2">
+                                <span class="decoration-emoji">⭐</span>
+                                <span class="decoration-name">星星</span>
+                                <span class="decoration-price">¥20</span>
+                            </div>
+                            <div class="decoration-item" data-index="3">
+                                <span class="decoration-emoji">🌸</span>
+                                <span class="decoration-name">花朵</span>
+                                <span class="decoration-price">¥25</span>
+                            </div>
+                            <div class="decoration-item" data-index="4">
+                                <span class="decoration-emoji">💰</span>
+                                <span class="decoration-name">金币</span>
+                                <span class="decoration-price">¥30</span>
+                            </div>
+                            <div class="decoration-item" data-index="5">
+                                <span class="decoration-emoji">❤️</span>
+                                <span class="decoration-name">爱心</span>
+                                <span class="decoration-price">¥35</span>
+                            </div>
+                        </div>
+                        <div class="game-controls">
+                            <button id="start-decoration-game" class="game-btn">开始装饰</button>
+                            <button id="reset-decoration-game" class="game-btn hidden">重新开始</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- 生日祝福 -->
@@ -104,7 +156,7 @@
     </div>
 
     <script src="game.js"></script>
-    <script src="new-birthday-game.js"></script>
     <script src="animation.js"></script>
+    <script src="new-birthday-game.js"></script>
 </body>
 </html>

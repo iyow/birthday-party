@@ -41,9 +41,6 @@ class BirthdayCakeGame {
     }
     
     init() {
-        // 创建装饰品选择面板
-        this.createDecorationPanel();
-        
         // 绑定事件
         this.bindEvents();
         
@@ -51,40 +48,10 @@ class BirthdayCakeGame {
         this.render();
     }
     
-    createDecorationPanel() {
-        const panel = document.createElement('div');
-        panel.id = 'decoration-panel';
-        panel.innerHTML = `
-            <h3>🎂 选择装饰品</h3>
-            <div class="decorations-grid">
-                ${this.decorationTypes.map((deco, index) => `
-                    <div class="decoration-item" data-index="${index}">
-                        <span class="decoration-emoji">${deco.emoji}</span>
-                        <span class="decoration-name">${deco.name}</span>
-                        <span class="decoration-price">¥${deco.price}</span>
-                    </div>
-                `).join('')}
-            </div>
-            <div class="game-controls">
-                <button id="start-decoration-game" class="game-btn">开始装饰</button>
-                <button id="reset-decoration-game" class="game-btn hidden">重新开始</button>
-            </div>
-        `;
-        
-        // 插入到游戏区域
-        const gameSection = document.querySelector('.game-section');
-        gameSection.appendChild(panel);
-        
-        // 隐藏原有的游戏元素
-        document.getElementById('start-game').classList.add('hidden');
-        document.getElementById('restart-game').classList.add('hidden');
-        document.querySelector('.game-instruction').innerHTML = '点击装饰品选择，然后在蛋糕上点击放置！<br>创造最美丽的生日蛋糕吧！';
-    }
-    
     bindEvents() {
         // 装饰品选择
         document.addEventListener('click', (e) => {
-            if (e.target.closest('.decoration-item')) {
+            if (e.target.closest('.decoration-item') && !this.gameState.isPlaying) {
                 const index = e.target.closest('.decoration-item').dataset.index;
                 this.selectDecoration(index);
             }
@@ -149,6 +116,7 @@ class BirthdayCakeGame {
         
         document.getElementById('start-decoration-game').classList.add('hidden');
         document.getElementById('reset-decoration-game').classList.remove('hidden');
+        document.getElementById('score').textContent = this.gameState.score;
         
         // 开始粒子动画
         this.animate();
@@ -162,6 +130,7 @@ class BirthdayCakeGame {
         
         document.getElementById('start-decoration-game').classList.remove('hidden');
         document.getElementById('reset-decoration-game').classList.add('hidden');
+        document.getElementById('score').textContent = '0';
         
         // 清除选中状态
         document.querySelectorAll('.decoration-item').forEach(item => {
@@ -378,14 +347,85 @@ class BirthdayCakeGame {
     }
 }
 
-// 页面加载完成后初始化游戏
-document.addEventListener('DOMContentLoaded', () => {
-    // 隐藏原有的游戏控制元素
-    const oldGameElements = document.querySelectorAll('#start-game, #restart-game, #score, #lives');
-    oldGameElements.forEach(el => {
-        if (el) el.style.display = 'none';
-    });
+// 游戏管理器
+const gameManager = {
+    currentGame: 'coins', // 默认游戏
+    cakeGame: null,
     
-    // 启动新游戏
-    window.birthdayCakeGame = new BirthdayCakeGame();
+    init() {
+        // 绑定游戏切换事件
+        document.querySelectorAll('.game-selector-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const game = e.target.dataset.game;
+                this.switchGame(game);
+            });
+        });
+        
+        // 初始化蛋糕游戏但不启动
+        this.cakeGame = new BirthdayCakeGame();
+        
+        // 隐藏蛋糕游戏控制面板
+        document.getElementById('cake-game-controls').classList.add('hidden');
+    },
+    
+    switchGame(game) {
+        this.currentGame = game;
+        
+        // 更新按钮状态
+        document.querySelectorAll('.game-selector-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.querySelector(`.game-selector-btn[data-game="${game}"]`).classList.add('active');
+        
+        if (game === 'coins') {
+            this.showCoinsGame();
+        } else {
+            this.showCakeGame();
+        }
+    },
+    
+    showCoinsGame() {
+        // 更新标题和说明
+        document.getElementById('game-title').textContent = '🎮 接金币游戏';
+        document.getElementById('game-instruction').innerHTML = '移动鼠标控制钱袋子接住掉落的金币！<br>不要让金币掉到地上，否则会损失生命！';
+        
+        // 显示原有游戏元素
+        document.getElementById('start-game').classList.remove('hidden');
+        document.getElementById('score').textContent = '0';
+        document.getElementById('lives').textContent = '3';
+        
+        // 隐藏蛋糕游戏控制面板
+        document.getElementById('cake-game-controls').classList.add('hidden');
+        
+        // 重置蛋糕游戏状态
+        if (this.cakeGame) {
+            this.cakeGame.resetGame();
+        }
+        
+        // 显示原有游戏按钮
+        document.getElementById('start-game').style.display = 'block';
+        document.getElementById('restart-game').style.display = 'block';
+    },
+    
+    showCakeGame() {
+        // 更新标题和说明
+        document.getElementById('game-title').textContent = '🎂 生日蛋糕装饰游戏';
+        document.getElementById('game-instruction').innerHTML = '点击装饰品选择，然后在蛋糕上点击放置！<br>创造最美丽的生日蛋糕吧！';
+        
+        // 隐藏原有游戏元素
+        document.getElementById('start-game').style.display = 'none';
+        document.getElementById('restart-game').style.display = 'none';
+        
+        // 显示蛋糕游戏控制面板
+        document.getElementById('cake-game-controls').classList.remove('hidden');
+        
+        // 更新分数显示
+        document.getElementById('lives').textContent = '∞';
+        document.getElementById('score').textContent = '0';
+    }
+};
+
+// 页面加载完成后初始化游戏管理器
+document.addEventListener('DOMContentLoaded', () => {
+    gameManager.init();
 });

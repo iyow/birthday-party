@@ -1,4 +1,3 @@
-/* 全局样式 */
 * {
     margin: 0;
     padding: 0;
@@ -6,30 +5,100 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
     min-height: 100vh;
     overflow-x: hidden;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* 开场动画 */
+#intro-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.intro-text {
+    text-align: center;
+    color: white;
+    animation: introText 2s ease-out;
+}
+
+.intro-line {
+    font-size: 4rem;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: lineAppear 1s ease-out forwards;
+}
+
+.intro-line:nth-child(1) {
+    animation-delay: 0.5s;
+    color: #ffd700;
+    text-shadow: 0 0 20px #ffd700;
+}
+
+.intro-line:nth-child(2) {
+    animation-delay: 1s;
+    color: #ff6b6b;
+    text-shadow: 0 0 20px #ff6b6b;
+}
+
+.intro-subtitle {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-top: 2rem;
+    opacity: 0;
+    animation: subtitleAppear 1s ease-out 2s forwards;
+}
+
+@keyframes lineAppear {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes subtitleAppear {
+    to {
+        opacity: 1;
+    }
+}
+
+/* 主内容 */
+main {
+    padding: 2rem;
+    min-height: 100vh;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem;
 }
 
 .title {
     text-align: center;
     font-size: 3rem;
-    margin-bottom: 1rem;
+    color: white;
     text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
-    animation: titleGlow 2s ease-in-out infinite alternate;
+    margin-bottom: 0.5rem;
+    animation: titleBounce 1s ease-out;
 }
 
-@keyframes titleGlow {
-    from { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
-    to { text-shadow: 0 0 30px rgba(255, 215, 0, 1), 0 0 40px rgba(255, 215, 0, 0.8); }
+@keyframes titleBounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
 .subtitle {
@@ -101,70 +170,30 @@ body {
     box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
 }
 
-/* 装饰品选择面板 */
-#decoration-panel {
-    margin-top: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    padding: 20px;
-    backdrop-filter: blur(5px);
-}
-
-#decoration-panel h3 {
-    color: #FFD700;
+/* 游戏选择按钮 */
+.game-selector {
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
 }
 
-.decorations-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.decoration-item {
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 10px;
-    padding: 15px 10px;
-    text-align: center;
+.game-selector-btn {
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    color: white;
     cursor: pointer;
     transition: all 0.3s ease;
-    border: 2px solid transparent;
 }
 
-.decoration-item:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(-3px);
+.game-selector-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
 }
 
-.decoration-item.selected {
-    background: rgba(255, 215, 0, 0.3);
-    border-color: #FFD700;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-}
-
-.decoration-emoji {
-    font-size: 2em;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.decoration-name {
-    color: white;
-    font-size: 0.9em;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.decoration-price {
-    color: #FFD700;
-    font-weight: bold;
-    font-size: 0.9em;
-}
-
-.game-controls {
-    text-align: center;
+.game-selector-btn.active {
+    background: linear-gradient(45deg, #ff6b6b, #ffd700);
+    border-color: transparent;
 }
 
 /* 生日祝福 */
@@ -399,7 +428,8 @@ body {
 .outro-message h2 {
     font-size: 3rem;
     margin-bottom: 1rem;
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    color: #ffd700;
+    text-shadow: 0 0 20px #ffd700;
 }
 
 .outro-message p {
@@ -408,36 +438,50 @@ body {
 }
 
 .outro-wishes {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
-    margin-bottom: 2rem;
+    max-width: 400px;
+    margin: 0 auto 2rem;
 }
 
 .outro-wish {
-    font-size: 1.2rem;
-    padding: 0.5rem;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1rem;
     border-radius: 10px;
-    animation: wishPulse 2s ease-in-out infinite;
+    backdrop-filter: blur(10px);
+    animation: wishSlideIn 0.5s ease-out forwards;
+    opacity: 0;
 }
 
-.outro-wish:nth-child(1) { animation-delay: 0s; }
-.outro-wish:nth-child(2) { animation-delay: 0.5s; }
-.outro-wish:nth-child(3) { animation-delay: 1s; }
-.outro-wish:nth-child(4) { animation-delay: 1.5s; }
+.outro-wish:nth-child(1) { animation-delay: 0.5s; }
+.outro-wish:nth-child(2) { animation-delay: 1s; }
+.outro-wish:nth-child(3) { animation-delay: 1.5s; }
+.outro-wish:nth-child(4) { animation-delay: 2s; }
 
-@keyframes wishPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+@keyframes wishSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .outro-heart {
-    font-size: 1.2rem;
-    color: #ffd700;
+    font-size: 2rem;
+    margin-top: 2rem;
+    animation: heartBeat 1s ease-in-out infinite;
 }
 
-/* 动画粒子 */
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* 粒子效果 */
 .intro-particles, .outro-particles {
     position: absolute;
     top: 0;
@@ -445,52 +489,46 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
+    overflow: hidden;
 }
 
 .particle {
     position: absolute;
-    width: 10px;
-    height: 10px;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.8) 0%, transparent 70%);
     border-radius: 50%;
-    background: #ffd700;
-    animation: particleFloat 5s linear infinite;
+    animation: particleFloat 3s ease-in-out infinite;
 }
 
 @keyframes particleFloat {
-    to {
-        transform: translateY(-100px) rotate(360deg);
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
         opacity: 0;
+    }
+    50% {
+        transform: translateY(-100px) rotate(180deg);
+        opacity: 1;
     }
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-    .container {
-        padding: 1rem;
-    }
-    
     .title {
         font-size: 2rem;
     }
-    
-    .subtitle {
-        font-size: 1.2rem;
+
+    .intro-line {
+        font-size: 2.5rem;
     }
-    
-    .game-section, .wishes-section, .cake-section {
-        padding: 1rem;
-    }
-    
+
     .wishes-grid {
         grid-template-columns: 1fr;
     }
-    
-    .decorations-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
 
-/* 隐藏类 */
-.hidden {
-    display: none !important;
+    .outro-wishes {
+        grid-template-columns: 1fr;
+    }
+
+    #game-canvas {
+        max-width: 100%;
+    }
 }
