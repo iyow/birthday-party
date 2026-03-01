@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎂 蟹老板生日快乐！🎉</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 开场动画容器 -->
+    <div id="intro-container" class="hidden">
+        <div class="intro-text">
+            <div class="intro-line">蟹老板的</div>
+            <div class="intro-line">生日派对</div>
+            <div class="intro-subtitle">农历二月二十五日</div>
+        </div>
+        <div class="intro-particles"></div>
+    </div>
+
+    <!-- 主内容 -->
+    <main id="main-content" class="hidden">
+        <div class="container">
+            <h1 class="title">🎂 蟹老板生日快乐！🎉</h1>
+            <p class="subtitle">农历二月二十五日</p>
+
+            <!-- 游戏区域 -->
+            <div class="game-section">
+                <h2>🎮 接金币游戏</h2>
+                <p class="game-instruction">移动鼠标控制钱袋子接住掉落的金币！<br>不要让金币掉到地上，否则会损失生命！</p>
+                <div class="game-stats">
+                    <div class="stat">分数: <span id="score">0</span></div>
+                    <div class="stat">生命: <span id="lives">3</span> ❤️</div>
+                </div>
+                <canvas id="game-canvas"></canvas>
+                <button id="start-game" class="game-btn">开始游戏</button>
+                <button id="restart-game" class="game-btn hidden">重新开始</button>
+            </div>
+
+            <!-- 生日祝福 -->
+            <div class="wishes-section">
+                <h2>🌟 生日祝福 🌟</h2>
+                <div class="wishes-grid">
+                    <div class="wish-card">
+                        <div class="wish-icon">💰</div>
+                        <h3>财源滚滚</h3>
+                        <p>愿你新的一年金币堆积如山！</p>
+                    </div>
+                    <div class="wish-card">
+                        <div class="wish-icon">🦀</div>
+                        <h3>蟹堡大卖</h3>
+                        <p>蟹堡王的生意越来越红火！</p>
+                    </div>
+                    <div class="wish-card">
+                        <div class="wish-icon">🎯</div>
+                        <h3>梦想成真</h3>
+                        <p>所有的目标都能一一实现！</p>
+                    </div>
+                    <div class="wish-card">
+                        <div class="wish-icon">❤️</div>
+                        <h3>健康快乐</h3>
+                        <p>身体健康，每天开开心心！</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 生日蛋糕 -->
+            <div class="cake-section">
+                <h2>🎂 许个愿吧！</h2>
+                <div class="cake-container">
+                    <div class="cake">
+                        <div class="cake-layer layer1"></div>
+                        <div class="cake-layer layer2"></div>
+                        <div class="cake-layer layer3"></div>
+                        <div class="candles">
+                            <div class="candle" id="candle1"><div class="flame"></div></div>
+                            <div class="candle" id="candle2"><div class="flame"></div></div>
+                            <div class="candle" id="candle3"><div class="flame"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <button id="blow-candles" class="wish-btn">吹灭蜡烛许愿！</button>
+                <div id="wish-result" class="wish-result hidden">
+                    <p>✨ 愿望已发送到宇宙！✨</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 落幕动画 -->
+    <div id="outro-container" class="hidden">
+        <div class="outro-content">
+            <div class="outro-message">
+                <h2>生日快乐！</h2>
+                <p>蟹老板，愿你新的一年：</p>
+                <div class="outro-wishes">
+                    <div class="outro-wish">💰 财源滚滚</div>
+                    <div class="outro-wish">🦀 蟹堡大卖</div>
+                    <div class="outro-wish">❤️ 健康快乐</div>
+                    <div class="outro-wish">🎯 梦想成真</div>
+                </div>
+                <div class="outro-heart">🧽 海绵宝宝 敬上</div>
+            </div>
+        </div>
+        <div class="outro-particles"></div>
+    </div>
+
+    <script src="game.js"></script>
+    <script src="animation.js"></script>
+</body>
+</html>

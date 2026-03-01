@@ -1,0 +1,508 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* 开场动画 */
+#intro-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.intro-text {
+    text-align: center;
+    color: white;
+    animation: introText 2s ease-out;
+}
+
+.intro-line {
+    font-size: 4rem;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: lineAppear 1s ease-out forwards;
+}
+
+.intro-line:nth-child(1) {
+    animation-delay: 0.5s;
+    color: #ffd700;
+    text-shadow: 0 0 20px #ffd700;
+}
+
+.intro-line:nth-child(2) {
+    animation-delay: 1s;
+    color: #ff6b6b;
+    text-shadow: 0 0 20px #ff6b6b;
+}
+
+.intro-subtitle {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-top: 2rem;
+    opacity: 0;
+    animation: subtitleAppear 1s ease-out 2s forwards;
+}
+
+@keyframes lineAppear {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes subtitleAppear {
+    to {
+        opacity: 1;
+    }
+}
+
+/* 主内容 */
+main {
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.title {
+    text-align: center;
+    font-size: 3rem;
+    color: white;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    margin-bottom: 0.5rem;
+    animation: titleBounce 1s ease-out;
+}
+
+@keyframes titleBounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 3rem;
+}
+
+/* 游戏区域 */
+.game-section {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.game-section h2 {
+    text-align: center;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.game-instruction {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1rem;
+}
+
+.game-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 1rem;
+}
+
+.stat {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+#game-canvas {
+    display: block;
+    margin: 0 auto 1rem;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+    cursor: none;
+}
+
+.game-btn {
+    display: block;
+    margin: 0 auto;
+    padding: 1rem 3rem;
+    font-size: 1.2rem;
+    background: linear-gradient(45deg, #ff6b6b, #ffd700);
+    border: none;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+.game-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+}
+
+/* 生日祝福 */
+.wishes-section {
+    margin-bottom: 3rem;
+}
+
+.wishes-section h2 {
+    text-align: center;
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+}
+
+.wishes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.wish-card {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    animation: cardFloat 3s ease-in-out infinite;
+}
+
+.wish-card:nth-child(1) { animation-delay: 0s; }
+.wish-card:nth-child(2) { animation-delay: 0.5s; }
+.wish-card:nth-child(3) { animation-delay: 1s; }
+.wish-card:nth-child(4) { animation-delay: 1.5s; }
+
+@keyframes cardFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.wish-card:hover {
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.wish-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.wish-card h3 {
+    color: #ffd700;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.wish-card p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* 蛋糕区域 */
+.cake-section {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.cake-section h2 {
+    text-align: center;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.cake-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.cake {
+    position: relative;
+    width: 200px;
+    height: 180px;
+}
+
+.cake-layer {
+    position: absolute;
+    border-radius: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.layer1 {
+    width: 200px;
+    height: 50px;
+    bottom: 0;
+    background: linear-gradient(180deg, #8B4513 0%, #654321 100%);
+    box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.layer2 {
+    width: 160px;
+    height: 50px;
+    bottom: 50px;
+    background: linear-gradient(180deg, #FFB6C1 0%, #FF69B4 100%);
+    box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.layer3 {
+    width: 120px;
+    height: 50px;
+    bottom: 100px;
+    background: linear-gradient(180deg, #FFA07A 0%, #FF6347 100%);
+    box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.candles {
+    position: absolute;
+    bottom: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 30px;
+}
+
+.candle {
+    width: 10px;
+    height: 40px;
+    background: linear-gradient(180deg, #FFD700 0%, #FFA500 100%);
+    border-radius: 5px 5px 0 0;
+    position: relative;
+    animation: candleFlicker 0.5s ease-in-out infinite alternate;
+}
+
+.flame {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 15px;
+    height: 20px;
+    background: linear-gradient(180deg, #FFD700 0%, #FF6347 50%, transparent 100%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: flameDance 0.3s ease-in-out infinite alternate;
+}
+
+@keyframes candleFlicker {
+    from { transform: rotate(-2deg); }
+    to { transform: rotate(2deg); }
+}
+
+@keyframes flameDance {
+    from {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-50%) scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+.wish-btn {
+    display: block;
+    margin: 0 auto;
+    padding: 1rem 3rem;
+    font-size: 1.2rem;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border: none;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.wish-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.wish-result {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: rgba(255, 215, 0, 0.2);
+    border-radius: 10px;
+    animation: resultPulse 1s ease-in-out infinite;
+}
+
+@keyframes resultPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+/* 落幕动画 */
+#outro-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.outro-content {
+    text-align: center;
+    color: white;
+    animation: outroFadeIn 2s ease-out;
+}
+
+@keyframes outroFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.outro-message h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #ffd700;
+    text-shadow: 0 0 20px #ffd700;
+}
+
+.outro-message p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.outro-wishes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    max-width: 400px;
+    margin: 0 auto 2rem;
+}
+
+.outro-wish {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1rem;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    animation: wishSlideIn 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+.outro-wish:nth-child(1) { animation-delay: 0.5s; }
+.outro-wish:nth-child(2) { animation-delay: 1s; }
+.outro-wish:nth-child(3) { animation-delay: 1.5s; }
+.outro-wish:nth-child(4) { animation-delay: 2s; }
+
+@keyframes wishSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.outro-heart {
+    font-size: 2rem;
+    margin-top: 2rem;
+    animation: heartBeat 1s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* 粒子效果 */
+.intro-particles, .outro-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.8) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: particleFloat 3s ease-in-out infinite;
+}
+
+@keyframes particleFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(-100px) rotate(180deg);
+        opacity: 1;
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem;
+    }
+
+    .intro-line {
+        font-size: 2.5rem;
+    }
+
+    .wishes-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .outro-wishes {
+        grid-template-columns: 1fr;
+    }
+
+    #game-canvas {
+        max-width: 100%;
+    }
+}
