@@ -25,15 +25,14 @@
 
             <!-- 游戏区域 -->
             <div class="game-section">
-                <h2>🎮 接金币游戏</h2>
-                <p class="game-instruction">移动鼠标控制钱袋子接住掉落的金币！<br>不要让金币掉到地上，否则会损失生命！</p>
+                <h2>🎮 生日蛋糕装饰游戏</h2>
+                <p class="game-instruction">选择装饰品并在蛋糕上点击放置！<br>创造最美丽的生日蛋糕吧！</p>
                 <div class="game-stats">
                     <div class="stat">分数: <span id="score">0</span></div>
-                    <div class="stat">生命: <span id="lives">3</span> ❤️</div>
+                    <div class="stat">生命: <span id="lives">∞</span> ❤️</div>
                 </div>
                 <canvas id="game-canvas"></canvas>
-                <button id="start-game" class="game-btn">开始游戏</button>
-                <button id="restart-game" class="game-btn hidden">重新开始</button>
+                <!-- 装饰游戏的控制面板将通过JavaScript动态创建 -->
             </div>
 
             <!-- 生日祝福 -->
@@ -105,6 +104,7 @@
     </div>
 
     <script src="game.js"></script>
+    <script src="new-birthday-game.js"></script>
     <script src="animation.js"></script>
 </body>
 </html>
