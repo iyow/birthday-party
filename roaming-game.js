@@ -221,13 +221,13 @@ class BirthdayRoamingGame {
         for (let i = 0; i < 5; i++) {
             const candleGeometry = new THREE.CylinderGeometry(0.1, 0.1, 2);
             const candleMaterial = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
-            const candle = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 2), candleMaterial);
+            const candle = new THREE.Mesh(candleGeometry, candleMaterial);
             candle.position.set(
                 (Math.random() - 0.5) * 3,
                 3.5,
                 (Math.random() - 0.5) * 3
             );
-            candleGroup.add(candle);
+            cakeGroup.add(candle);
         }
         
         cakeGroup.position.set(-30, 0, -30);
