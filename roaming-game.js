@@ -314,8 +314,8 @@ class BirthdayRoamingGame {
     createPlayer() {
         this.player = new THREE.Group();
         
-        // 玩家身体
-        const bodyGeometry = new THREE.CapsuleGeometry(0.5, 1.5, 4, 8);
+        // 玩家身体 - 使用圆柱体替代胶囊体（兼容性更好）
+        const bodyGeometry = new THREE.CylinderGeometry(0.4, 0.4, 1.5, 8);
         const bodyMaterial = new THREE.MeshLambertMaterial({ color: 0x00CED1 });
         const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
         body.castShadow = true;

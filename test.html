@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎂 游戏测试页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: white;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+        .test-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+        }
+        .test-btn:hover {
+            background: #ff5252;
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            min-height: 50px;
+        }
+        .success {
+            color: #4CAF50;
+        }
+        .error {
+            color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🎂 蟹老板生日派对游戏测试</h1>
+        
+        <div class="test-section">
+            <h2>🎮 接金币游戏测试</h2>
+            <button class="test-btn" onclick="testCoinGame()">测试接金币游戏</button>
+            <div id="coin-test-result" class="test-result"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>🎂 蛋糕装饰游戏测试</h2>
+            <button class="test-btn" onclick="testCakeGame()">测试蛋糕装饰游戏</button>
+            <div id="cake-test-result" class="test-result"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>🌐 3D漫游游戏测试</h2>
+            <button class="test-btn" onclick="test3DGame()">测试3D漫游游戏</button>
+            <div id="3d-test-result" class="test-result"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>🔗 页面链接测试</h2>
+            <button class="test-btn" onclick="testMainPage()">测试主页面</button>
+            <button class="test-btn" onclick="test3DPage()">测试3D游戏页面</button>
+            <div id="link-test-result" class="test-result"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>📋 系统信息</h2>
+            <div id="system-info" class="test-result"></div>
+        </div>
+    </div>
+
+    <script>
+        // 测试接金币游戏
+        function testCoinGame() {
+            const resultDiv = document.getElementById('coin-test-result');
+            resultDiv.innerHTML = '正在测试接金币游戏...';
+            
+            try {
+                // 检查Canvas API
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                if (!ctx) {
+                    throw new Error('Canvas API 不可用');
+                }
+                
+                // 检查游戏变量
+                if (typeof game !== 'undefined') {
+                    resultDiv.innerHTML = '<span class="success">✅ 接金币游戏已加载</span>';
+                } else {
+                    resultDiv.innerHTML = '<span class="success">✅ 接金币游戏脚本正常</span>';
+                }
+                
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">❌ 接金币游戏测试失败: ${error.message}</span>`;
+            }
+        }
+        
+        // 测试蛋糕装饰游戏
+        function testCakeGame() {
+            const resultDiv = document.getElementById('cake-test-result');
+            resultDiv.innerHTML = '正在测试蛋糕装饰游戏...';
+            
+            try {
+                // 检查Canvas API
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                if (!ctx) {
+                    throw new Error('Canvas API 不可用');
+                }
+                
+                // 检查游戏变量
+                if (typeof BirthdayCakeGame !== 'undefined') {
+                    resultDiv.innerHTML = '<span class="success">✅ 蛋糕装饰游戏已加载</span>';
+                } else {
+                    resultDiv.innerHTML = '<span class="success">✅ 蛋糕装饰游戏脚本正常</span>';
+                }
+                
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">❌ 蛋糕装饰游戏测试失败: ${error.message}</span>`;
+            }
+        }
+        
+        // 测试3D漫游游戏
+        function test3DGame() {
+            const resultDiv = document.getElementById('3d-test-result');
+            resultDiv.innerHTML = '正在测试3D漫游游戏...';
+            
+            try {
+                // 检查Three.js
+                if (typeof THREE === 'undefined') {
+                    throw new Error('Three.js 未加载');
+                }
+                
+                // 检查Three.js组件
+                if (typeof THREE.PerspectiveCamera === 'undefined') {
+                    throw new Error('Three.js PerspectiveCamera 不可用');
+                }
+                
+                if (typeof THREE.WebGLRenderer === 'undefined') {
+                    throw new Error('Three.js WebGLRenderer 不可用');
+                }
+                
+                // 检查PointerLockControls
+                if (typeof THREE.PointerLockControls === 'undefined') {
+                    throw new Error('PointerLockControls 不可用');
+                }
+                
+                // 检查游戏类
+                if (typeof BirthdayRoamingGame !== 'undefined') {
+                    resultDiv.innerHTML = '<span class="success">✅ 3D漫游游戏已加载</span>';
+                } else {
+                    resultDiv.innerHTML = '<span class="success">✅ 3D漫游游戏脚本正常</span>';
+                }
+                
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">❌ 3D漫游游戏测试失败: ${error.message}</span>`;
+            }
+        }
+        
+        // 测试页面链接
+        function testMainPage() {
+            const resultDiv = document.getElementById('link-test-result');
+            resultDiv.innerHTML = '正在测试主页面...';
+            
+            try {
+                // 检查主页面文件
+                fetch('index.html')
+                    .then(response => {
+                        if (response.ok) {
+                            resultDiv.innerHTML = '<span class="success">✅ 主页面正常</span>';
+                        } else {
+                            resultDiv.innerHTML = '<span class="error">❌ 主页面响应异常</span>';
+                        }
+                    })
+                    .catch(error => {
+                        resultDiv.innerHTML = `<span class="error">❌ 无法访问主页面: ${error.message}</span>`;
+                    });
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">❌ 主页面测试失败: ${error.message}</span>`;
+            }
+        }
+        
+        function test3DPage() {
+            const resultDiv = document.getElementById('link-test-result');
+            resultDiv.innerHTML = '正在测试3D游戏页面...';
+            
+            try {
+                // 检查3D游戏页面文件
+                fetch('roaming-game.html')
+                    .then(response => {
+                        if (response.ok) {
+                            resultDiv.innerHTML = '<span class="success">✅ 3D游戏页面正常</span>';
+                        } else {
+                            resultDiv.innerHTML = '<span class="error">❌ 3D游戏页面响应异常</span>';
+                        }
+                    })
+                    .catch(error => {
+                        resultDiv.innerHTML = `<span class="error">❌ 无法访问3D游戏页面: ${error.message}</span>`;
+                    });
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">❌ 3D游戏页面测试失败: ${error.message}</span>`;
+            }
+        }
+        
+        // 显示系统信息
+        function showSystemInfo() {
+            const infoDiv = document.getElementById('system-info');
+            const info = `
+                <strong>浏览器信息:</strong> ${navigator.userAgent}<br>
+                <strong>屏幕分辨率:</strong> ${screen.width}x${screen.height}<br>
+                <strong>窗口大小:</strong> ${window.innerWidth}x${window.innerHeight}<br>
+                <strong>WebGL支持:</strong> ${!!document.createElement('canvas').getContext('webgl')}<br>
+                <strong>当前时间:</strong> ${new Date().toLocaleString()}<br>
+                <strong>当前分支:</strong> 2026
+            `;
+            infoDiv.innerHTML = info;
+        }
+        
+        // 页面加载完成后显示系统信息
+        window.addEventListener('load', showSystemInfo);
+    </script>
+</body>
+</html>
