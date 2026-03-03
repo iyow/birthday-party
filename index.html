@@ -28,6 +28,7 @@
                 <div class="game-selector">
                     <button class="game-selector-btn active" data-game="coins">接金币游戏</button>
                     <button class="game-selector-btn" data-game="cake">蛋糕装饰游戏</button>
+                    <button class="game-selector-btn" data-game="roaming">3D漫游游戏</button>
                 </div>
                 
                 <h2 id="game-title">🎮 接金币游戏</h2>
@@ -84,6 +85,21 @@
                             <button id="reset-decoration-game" class="game-btn hidden">重新开始</button>
                         </div>
                     </div>
+                </div>
+                
+                <!-- 3D漫游游戏容器 -->
+                <div id="roaming-game-container" class="hidden">
+                    <div class="roaming-game-ui">
+                        <div class="roaming-game-stats">
+                            <div class="stat">收集的金币: <span id="roaming-score">0</span></div>
+                            <div class="stat">找到的礼物: <span id="roaming-gifts">0</span>/5</div>
+                        </div>
+                        <div class="roaming-game-controls">
+                            <button id="roaming-start-btn" class="game-btn">开始3D漫游</button>
+                            <button id="roaming-back-btn" class="game-btn">返回主菜单</button>
+                        </div>
+                    </div>
+                    <div id="roaming-game-canvas"></div>
                 </div>
             </div>
 

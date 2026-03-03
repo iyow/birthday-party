@@ -283,3 +283,77 @@ styleSheet.textContent = `
     }
 `;
 document.head.appendChild(styleSheet);
+
+// 3D漫游游戏切换逻辑
+document.addEventListener('DOMContentLoaded', function() {
+    const gameSelectorBtns = document.querySelectorAll('.game-selector-btn');
+    const gameTitle = document.getElementById('game-title');
+    const gameInstruction = document.getElementById('game-instruction');
+    const gameCanvas = document.getElementById('game-canvas');
+    const cakeGameControls = document.getElementById('cake-game-controls');
+    const roamingGameContainer = document.getElementById('roaming-game-container');
+    
+    // 游戏说明文本
+    const gameInstructions = {
+        coins: {
+            title: '🎮 接金币游戏',
+            instruction: '移动鼠标控制钱袋子接住掉落的金币！<br>不要让金币掉到地上，否则会损失生命！'
+        },
+        cake: {
+            title: '🎂 蛋糕装饰游戏',
+            instruction: '选择装饰品来装饰生日蛋糕！<br>每个装饰品都有不同的价格，尽情发挥创意吧！'
+        },
+        roaming: {
+            title: '🎮 3D漫游游戏',
+            instruction: '在3D生日派对世界中自由探索！<br>使用WASD移动，鼠标控制视角，空格跳跃，收集金币和礼物！'
+        }
+    };
+    
+    gameSelectorBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const gameType = this.dataset.game;
+            
+            // 更新按钮状态
+            gameSelectorBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            // 更新游戏标题和说明
+            gameTitle.textContent = gameInstructions[gameType].title;
+            gameInstruction.innerHTML = gameInstructions[gameType].instruction;
+            
+            // 切换游戏显示
+            switch(gameType) {
+                case 'coins':
+                    gameCanvas.style.display = 'block';
+                    cakeGameControls.classList.add('hidden');
+                    roamingGameContainer.classList.add('hidden');
+                    break;
+                case 'cake':
+                    gameCanvas.style.display = 'none';
+                    cakeGameControls.classList.remove('hidden');
+                    roamingGameContainer.classList.add('hidden');
+                    break;
+                case 'roaming':
+                    gameCanvas.style.display = 'none';
+                    cakeGameControls.classList.add('hidden');
+                    roamingGameContainer.classList.remove('hidden');
+                    break;
+            }
+        });
+    });
+    
+    // 3D漫游游戏按钮事件
+    document.getElementById('roaming-start-btn').addEventListener('click', function() {
+        // 重置游戏状态
+        document.getElementById('roaming-score').textContent = '0';
+        document.getElementById('roaming-gifts').textContent = '0';
+        
+        // 切换到3D游戏页面
+        window.location.href = 'roaming-game.html';
+    });
+    
+    document.getElementById('roaming-back-btn').addEventListener('click', function() {
+        // 返回主菜单
+        window.location.reload();
+    });
+});
