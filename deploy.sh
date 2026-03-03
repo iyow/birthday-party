@@ -39,9 +39,9 @@ fi
 current_branch=$(git branch --show-current)
 echo "📋 当前分支: $current_branch"
 
-# 推送到 GitHub
-echo "🚀 推送到 GitHub..."
-git push origin $current_branch
+# 推送到 GitHub (2026分支)
+echo "🚀 推送到 GitHub 2026分支..."
+git push origin 2026
 
 echo "✅ 部署完成！"
 echo ""
