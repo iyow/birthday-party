@@ -45,7 +45,7 @@ git push origin $current_branch
 
 echo "✅ 部署完成！"
 echo ""
-echo "🌐 访问地址: https://<username>.github.io/<repo-name>/"
+echo "🌐 访问地址: https://iyow.github.io/birthday-party/"
 echo ""
 echo "🎮 新增功能:"
 echo "   - 3D漫游游戏 (roaming-game.html)"
